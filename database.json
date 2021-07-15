@@ -1,0 +1,18 @@
+{
+  "dev": {
+    "driver": "pg",
+    "host": "localhost",
+    "port": "5432",
+    "database": "fullstack_store_dev",
+    "user": "postgres",
+    "password": "postgrespass"
+  },
+  "test": {
+    "driver": "pg",
+    "host": "localhost",
+    "port": "5432",
+    "database": "fullstack_store_test",
+    "user": "postgres",
+    "password": "postgrespass"
+  }
+}
