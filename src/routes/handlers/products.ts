@@ -120,7 +120,7 @@ export const updateProduct = async (req: express.Request, res: express.Response)
 
 export const deleteProduct = async (req: express.Request, res: express.Response): Promise<void> => {
 
-  const id = parseInt(req.query.id as string);
+  const id = parseInt(req.params.id as string);
   try {
     const productToDelete: Product = await productModel.getProductById(id);
     if(!productToDelete) {
@@ -138,7 +138,7 @@ export const deleteProduct = async (req: express.Request, res: express.Response)
 export const productsRoutes = (app: express.Application): void => {
   app.post('/api/products/create', createProduct)
   app.put('/api/products/update', updateProduct)
-  app.delete('/api/products/delete', deleteProduct)
+  app.delete('/api/products/delete/:id', deleteProduct)
   app.get('/api/products/list', productsList)
   app.get('/api/products/:id', productById)
   app.get('/api/products/:category', productByCategory)
