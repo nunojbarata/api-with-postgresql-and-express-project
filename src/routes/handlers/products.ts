@@ -74,11 +74,7 @@ export const createProduct = async (req: express.Request, res: express.Response)
       res.send('Something went wrong. Try again!')
     } else {
       const newProduct = await productModel.createProduct(query);
-      res.send(`<h3>Product successfully created.</h3>
-      <p>ID: ${newProduct.id}</p>
-      <p>TITLE: ${newProduct.title}</p>
-      <p>PRICE: ${newProduct.price}</p>
-      <p>CATEGORY: ${newProduct.category}</p>`)
+      res.send(newProduct)
     }
   } catch (err) {
     res.status(400)
