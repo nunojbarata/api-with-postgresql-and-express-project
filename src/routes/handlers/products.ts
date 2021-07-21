@@ -3,17 +3,6 @@ import { ProductModel } from '../../models/product_model';
 import { NewProduct, Product } from "../../types/types";
 import { requestIsInvalid } from "../utils/utils";
 
-// TODO - confirmar que os erros em todos os catch estao correctos
-
-/*
-ISTO DO FICHEIRO INDEX DE ROUTES:
-routes.get('/deleteproduct', deleteProduct);
-
-fazer para todos os metodos
-
-ERRO E PORQUE METODOS SO FUNCIONAM SEPARADAMENTE NO INDEX? SOLUCAO ACTUAL NAO FUNCIONA
-*/
-
 const productModel = new ProductModel();
 
 const productsList = async (req: express.Request, res: express.Response): Promise<void> => {
@@ -74,9 +63,8 @@ const createProduct = async (req: express.Request, res: express.Response): Promi
       res.send(newProduct)
     }
   } catch (err) {
-    //res.status(400)
-    res.send(req)
-    //res.json(err)
+    res.status(400)
+    res.json(err)
   }
 }
 
