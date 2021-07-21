@@ -8,11 +8,15 @@ export interface Product extends NewProduct {
   id: number,
 }
 
-export interface User {
-  id?: number,
+export interface NewUser {
   firstName: string,
   lastName: string,
+  username: string,
   password: string
+}
+
+export interface User extends NewUser {
+  id: number,
 }
 
 export interface Order {

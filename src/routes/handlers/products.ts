@@ -1,5 +1,5 @@
 import express, { Router, Request, Response } from "express";
-import { ProductModel } from '../../models/productModel';
+import { ProductModel } from '../../models/product_model';
 import { NewProduct, Product } from "../../types/types";
 import { requestIsInvalid } from "../utils/utils";
 
@@ -10,7 +10,11 @@ ISTO DO FICHEIRO INDEX DE ROUTES:
 routes.get('/deleteproduct', deleteProduct);
 
 fazer para todos os metodos
+
+ERRO E PORQUE METODOS SO FUNCIONAM SEPARADAMENTE NO INDEX? SOLUCAO ACTUAL NAO FUNCIONA
 */
+
+export const ProductRouter: Router = Router()
 
 const productModel = new ProductModel();
 
@@ -119,8 +123,6 @@ export const deleteProduct = async (req: express.Request, res: express.Response)
   const id = parseInt(req.query.id as string);
   try {
     const productToDelete: Product = await productModel.getProductById(id);
-    console.log(id);
-    console.log(productToDelete);
     if(!productToDelete) {
       res.send('There is no product with the specified id!')
     } else {
@@ -133,12 +135,12 @@ export const deleteProduct = async (req: express.Request, res: express.Response)
   }
 }
 
-export const productsRoutes = (app: express.Application): void => {
-  app.get('/api/products_list', productsList)
+export const productsRoutes: Router = (app: express.Application): void => {
+  app.post('/api/products/create', createProduct)
+  app.put('/api/products/update', updateProduct)
+  app.delete('/api/products/delete', deleteProduct)
+  app.get('/api/products/list', productsList)
   app.get('/api/products/:id', productById)
   app.get('/api/products/:category', productByCategory)
-  app.post('/api/products_create', createProduct)
-  app.put('/api/products_update', updateProduct)
-  app.delete('/api/products_create', deleteProduct)
 }
 

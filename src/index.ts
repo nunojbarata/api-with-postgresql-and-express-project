@@ -2,12 +2,10 @@ import express, { Application } from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import { notFound } from './routes/utils/ui/notfound';
-import { productsRoutes } from './routes/api/products';
+import { productsRoutes } from './routes/handlers/products';
 
 const app: Application = express()
 const port = 3000
-
-//app.use(cors());
 
 app.use(bodyParser.json());
 

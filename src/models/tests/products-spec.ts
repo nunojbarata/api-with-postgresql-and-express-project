@@ -1,34 +1,34 @@
-import { ProductModel } from "../productModel"
+import { ProductModel } from "../product_model"
 
-const store = new ProductModel();
+const productModel = new ProductModel();
 
 describe("products Model", () => {
   it('should have a getAllProducts method', () => {
-    expect(store.getAllProducts).toBeDefined();
+    expect(productModel.getAllProducts).toBeDefined();
   });
 
   it('should have a getProductById method', () => {
-    expect(store.getProductById).toBeDefined();
+    expect(productModel.getProductById).toBeDefined();
   });
 
   it('should have a show by getProductsByCategory method', () => {
-    expect(store.getProductsByCategory).toBeDefined();
+    expect(productModel.getProductsByCategory).toBeDefined();
   });
 
   it('should have a createProduct method', () => {
-    expect(store.createProduct).toBeDefined();
+    expect(productModel.createProduct).toBeDefined();
   });
 
   it('should have a updateProduct method', () => {
-    expect(store.updateProduct).toBeDefined();
+    expect(productModel.updateProduct).toBeDefined();
   });
 
   it('should have a deleteProduct method', () => {
-    expect(store.deleteProduct).toBeDefined();
+    expect(productModel.deleteProduct).toBeDefined();
   });
 
   it('createProduct method should add a product', async () => {
-    const result = await store.createProduct({
+    const result = await productModel.createProduct({
       title: 'Blue T-Shirt',
       price: 25,
       category: 'Apparel',
@@ -42,7 +42,7 @@ describe("products Model", () => {
   });
 
   it('getProductById method should return the product with the id specified', async () => {
-    const result = await store.getProductById(1);
+    const result = await productModel.getProductById(1);
     expect(result).toEqual({
       id: 1,
       title: 'Blue T-Shirt',
@@ -52,7 +52,7 @@ describe("products Model", () => {
   });
 
   it('getByCategory method should return the products with the category specified', async () => {
-    const result = await store.getProductsByCategory('Apparel');
+    const result = await productModel.getProductsByCategory('Apparel');
     expect(result).toEqual([{
       id: 1,
       title: 'Blue T-Shirt',
@@ -61,8 +61,8 @@ describe("products Model", () => {
     }]);
   });
 
-  it('index method should return all product', async () => {
-    const result = await store.getAllProducts();
+  it('getAllProducts method should return all product', async () => {
+    const result = await productModel.getAllProducts();
     expect(result).toEqual([{
       id: 1,
       title: 'Blue T-Shirt',
@@ -72,7 +72,7 @@ describe("products Model", () => {
   });
 
   it('update method should update a certain product', async () => {
-    const result = await store.updateProduct(1, {
+    const result = await productModel.updateProduct(1, {
       title: 'Red T-Shirt',
       price: 20,
       category: 'Apparel',
@@ -86,7 +86,7 @@ describe("products Model", () => {
   });
 
   it('delete method should delete the product with the id specified', async () => {
-    await store.deleteProduct(1);
-    expect((await store.getAllProducts()).length).toEqual(0);
+    await productModel.deleteProduct(1);
+    expect((await productModel.getAllProducts()).length).toEqual(0);
   });
 })
