@@ -14,11 +14,9 @@ fazer para todos os metodos
 ERRO E PORQUE METODOS SO FUNCIONAM SEPARADAMENTE NO INDEX? SOLUCAO ACTUAL NAO FUNCIONA
 */
 
-export const ProductRouter: Router = Router()
-
 const productModel = new ProductModel();
 
-export const productsList = async (req: express.Request, res: express.Response): Promise<void> => {
+const productsList = async (req: express.Request, res: express.Response): Promise<void> => {
   try {
     const listAllProducts: Product[] = await productModel.getAllProducts();
     if (listAllProducts.length > 0) {
@@ -32,7 +30,7 @@ export const productsList = async (req: express.Request, res: express.Response):
   }
 }
 
-export const productById = async (req: express.Request, res: express.Response): Promise<void> => {
+const productById = async (req: express.Request, res: express.Response): Promise<void> => {
 
   const id = parseInt(req.params.id);
   try {
@@ -50,7 +48,7 @@ export const productById = async (req: express.Request, res: express.Response): 
 }
 
 
-export const productByCategory = async (req: express.Request, res: express.Response ): Promise<void> => {
+const productByCategory = async (req: express.Request, res: express.Response ): Promise<void> => {
 
   const category = req.params.category;
   try {
@@ -66,10 +64,9 @@ export const productByCategory = async (req: express.Request, res: express.Respo
   }
 }
 
-export const createProduct = async (req: express.Request, res: express.Response): Promise<void> => {
-  const query = req.query as unknown as NewProduct;
-
+const createProduct = async (req: express.Request, res: express.Response): Promise<void> => {
   try {
+    const query = req.query as unknown as NewProduct;
     if(await requestIsInvalid(query) == true) {
       res.send('Something went wrong. Try again!')
     } else {
@@ -77,12 +74,13 @@ export const createProduct = async (req: express.Request, res: express.Response)
       res.send(newProduct)
     }
   } catch (err) {
-    res.status(400)
-    res.json(err)
+    //res.status(400)
+    res.send(req)
+    //res.json(err)
   }
 }
 
-export const updateProduct = async (req: express.Request, res: express.Response): Promise<void> => {
+const updateProduct = async (req: express.Request, res: express.Response): Promise<void> => {
 
   const id: number = req.query.id as unknown as number;
   const query: NewProduct =  {
@@ -131,12 +129,13 @@ export const deleteProduct = async (req: express.Request, res: express.Response)
   }
 }
 
-export const productsRoutes = (app: express.Application): void => {
-  app.post('/api/products/create', createProduct)
-  app.put('/api/products/update', updateProduct)
-  app.delete('/api/products/delete/:id', deleteProduct)
-  app.get('/api/products/list', productsList)
-  app.get('/api/products/:id', productById)
-  app.get('/api/products/:category', productByCategory)
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const productsRoutes = (app: express.Application) => {
+  app.post('/products/create', createProduct)
+  app.put('/products/update', updateProduct)
+  app.delete('/products/delete/:id', deleteProduct)
+  app.get('/products/list', productsList)
+  app.get('/products/:id', productById)
+  app.get('/products/:category', productByCategory)
 }
 
