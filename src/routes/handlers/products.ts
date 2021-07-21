@@ -135,7 +135,7 @@ export const deleteProduct = async (req: express.Request, res: express.Response)
   }
 }
 
-export const productsRoutes: Router = (app: express.Application): void => {
+export const productsRoutes = (app: express.Application): void => {
   app.post('/api/products/create', createProduct)
   app.put('/api/products/update', updateProduct)
   app.delete('/api/products/delete', deleteProduct)
